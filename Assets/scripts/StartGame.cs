@@ -5,16 +5,14 @@ using UnityEngine.UI;
 
 public class StartGame : MonoBehaviour
 {
-    public GameObject right;
-    public GameObject left;
-    public GameObject GameInspector;
-
+    public GameObject ScrollManager;
+    public GameObject SelectMusic;
+    
 
     public void TimeToStartGame()
     {
-        GameInspector.SetActive(!GameInspector.activeSelf);
-        right.SetActive(!right.activeSelf);
-        left.SetActive(!left.activeSelf);
+        SelectMusic.SetActive(true);
+        ScrollManager.SetActive(true);
         gameObject.SetActive(false);
     }
 }
