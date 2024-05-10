@@ -14,6 +14,10 @@ public class Move : MonoBehaviour
     public Material Ground2;
     public Material Ground3;
     private Renderer renderer;
+
+    public GameObject CubeParticle1;
+    public GameObject CubeParticle2;
+    public GameObject CubeParticle3;
     public void Start()
     {
         anim = GetComponent<Animator>();
@@ -45,11 +49,17 @@ public class Move : MonoBehaviour
         {
             anim.SetBool("left", true);
             renderer.material = Ground1;
+            CubeParticle1.SetActive(true);
+            CubeParticle2.SetActive(false);
+            CubeParticle3.SetActive(false);
         }
         else if (anim.GetBool("right") == true)
         {
             anim.SetBool("right", false);
             renderer.material = Ground2;
+            CubeParticle1.SetActive(false);
+            CubeParticle2.SetActive(true);
+            CubeParticle3.SetActive(false);
         }
     }
     public void LeftSide()
@@ -58,11 +68,17 @@ public class Move : MonoBehaviour
         {
             anim.SetBool("right", true);
             renderer.material = Ground3;
+            CubeParticle1.SetActive(false);
+            CubeParticle2.SetActive(false);
+            CubeParticle3.SetActive(true);
         }
         else if (anim.GetBool("left") == true)
         {
             anim.SetBool("left", false);
             renderer.material = Ground2;
+            CubeParticle1.SetActive(false);
+            CubeParticle2.SetActive(true);
+            CubeParticle3.SetActive(false);
         }
     }
     /*void Update()

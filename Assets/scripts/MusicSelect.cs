@@ -19,11 +19,14 @@ public class MusicSelect : MonoBehaviour
     public GameObject dimeDelationAsAnObject;
     public float FadeDuration = 1f;
     private Color OriginalColor;
+
+    public bool MusicIsPlaying = false;
+    public GameObject RepeatButton;
     private void Start()
     {
         OriginalColor = dimeDelation.color;
 
-        Buttons = GameObject.FindObjectsOfType<Button>();
+       // Buttons = GameObject.FindObjectsOfType<Button>();
         for (int i = 0; i < Buttons.Length; i++)
         {
             int index = i;
@@ -61,6 +64,8 @@ public class MusicSelect : MonoBehaviour
         MusicPlayer.clip = AllMusic[musicIndex];
         MusicPlayer.Play();
 
+        MusicIsPlaying = true;
+
 
         ScoreText.SetActive(!ScoreText.activeSelf);
         NeonDreams.SetActive(true);
@@ -78,5 +83,17 @@ public class MusicSelect : MonoBehaviour
             yield return null;
         }
         dimeDelationAsAnObject.SetActive(false);
+    }
+    private void Update()
+    {
+        if (MusicIsPlaying)
+        {
+            if (!MusicPlayer.isPlaying)
+            {
+                Debug.Log("Finish music");
+                NeonDreams.SetActive(false);
+                RepeatButton.SetActive(true);
+            }
+        }
     }
 }
