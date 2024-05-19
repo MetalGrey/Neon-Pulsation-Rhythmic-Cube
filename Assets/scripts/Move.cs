@@ -18,8 +18,21 @@ public class Move : MonoBehaviour
     public GameObject CubeParticle1;
     public GameObject CubeParticle2;
     public GameObject CubeParticle3;
+
+//    public ParticleSystem JumpParticle1;
+//    public ParticleSystem JumpParticle2;0
+//    public ParticleSystem JumpParticle3;
+    public float delay = 0.05f;
     public void Start()
     {
+    //    var main1 = JumpParticle1.main;
+    //    main1.startDelay = delay;
+    //    var main2 = JumpParticle2.main;
+   //     main2.startDelay = delay;
+   //     var main3 = JumpParticle3.main;
+   //     main3.startDelay = delay;
+
+
         anim = GetComponent<Animator>();
         renderer = GetComponent<Renderer>();
         renderer.material = Ground2;
@@ -48,6 +61,7 @@ public class Move : MonoBehaviour
         if (anim.GetBool("right") == false)
         {
             anim.SetBool("left", true);
+        //    JumpParticle1.Play();
             renderer.material = Ground1;
             CubeParticle1.SetActive(true);
             CubeParticle2.SetActive(false);
@@ -55,7 +69,9 @@ public class Move : MonoBehaviour
         }
         else if (anim.GetBool("right") == true)
         {
+            
             anim.SetBool("right", false);
+         //   JumpParticle2.Play();
             renderer.material = Ground2;
             CubeParticle1.SetActive(false);
             CubeParticle2.SetActive(true);
@@ -67,6 +83,7 @@ public class Move : MonoBehaviour
         if (anim.GetBool("left") == false)
         {
             anim.SetBool("right", true);
+        //    JumpParticle3.Play();
             renderer.material = Ground3;
             CubeParticle1.SetActive(false);
             CubeParticle2.SetActive(false);
@@ -75,11 +92,13 @@ public class Move : MonoBehaviour
         else if (anim.GetBool("left") == true)
         {
             anim.SetBool("left", false);
+        //    JumpParticle2.Play();
             renderer.material = Ground2;
             CubeParticle1.SetActive(false);
             CubeParticle2.SetActive(true);
             CubeParticle3.SetActive(false);
         }
+        
     }
     /*void Update()
     {

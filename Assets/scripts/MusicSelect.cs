@@ -7,6 +7,7 @@ public class MusicSelect : MonoBehaviour
 {
     public Button[] Buttons;
     public AudioClip[] AllMusic;
+    public Text[] ScoreTextSave;
     public AudioSource MusicPlayer;
     public Text dimeDelation;
     public GameObject Scroll;
@@ -15,6 +16,7 @@ public class MusicSelect : MonoBehaviour
     public GameObject ScoreText;
     public GameObject NeonDreams;
     public GameObject TimeCounter;
+    
 
     public GameObject dimeDelationAsAnObject;
     public float FadeDuration = 1f;
@@ -22,6 +24,8 @@ public class MusicSelect : MonoBehaviour
 
     public bool MusicIsPlaying = false;
     public GameObject RepeatButton;
+
+    private int currentMusicIndex;
     private void Start()
     {
         OriginalColor = dimeDelation.color;
@@ -31,6 +35,13 @@ public class MusicSelect : MonoBehaviour
         {
             int index = i;
             Buttons[i].onClick.AddListener(() => ButtonClicked(index));
+        }
+
+        for (int j = 0; j < ScoreTextSave.Length; j++)
+        {
+            string currentLastScore = "LastScore" + j;
+            float gettingFlotForText = PlayerPrefs.GetFloat(currentLastScore, 0); 
+            ScoreTextSave[j].text = ((int)gettingFlotForText).ToString() + "%";
         }
     }
 
@@ -69,6 +80,8 @@ public class MusicSelect : MonoBehaviour
 
         ScoreText.SetActive(!ScoreText.activeSelf);
         NeonDreams.SetActive(true);
+
+        currentMusicIndex = musicIndex;
     }
     IEnumerator FadeText()
     {
@@ -91,8 +104,23 @@ public class MusicSelect : MonoBehaviour
             if (!MusicPlayer.isPlaying)
             {
                 Debug.Log("Finish music");
+
+                MusicAnalysis MusicAnalysis = NeonDreams.GetComponent<MusicAnalysis>();
+                float currentScore = MusicAnalysis.ScoreP;
+                string key = "LastScore" + currentMusicIndex;
+                float LodedData = PlayerPrefs.GetFloat(key, 0);
+
+                if (LodedData < currentScore)
+                {
+                    PlayerPrefs.SetFloat(key, currentScore);
+                    PlayerPrefs.Save();
+                }
+                
+
                 NeonDreams.SetActive(false);
                 RepeatButton.SetActive(true);
+                right.SetActive(false);
+                left.SetActive(false);
             }
         }
     }

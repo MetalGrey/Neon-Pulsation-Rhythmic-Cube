@@ -26,9 +26,13 @@ public class MusicAnalysis : MonoBehaviour
     private float currentIntensity; // Текущая интенсивность bloom
 
     private int Score = 0;
-    private int Missed = 0;
-    private float ScoreP;
+    public int Missed = 0;
+    public float ScoreP;
     public Text ScoreText;
+
+    public GameObject PulsationText;
+
+    public ComboSystem comboSystem;
     void Start()
     {
         spectrumData = new float[sampleSize];
@@ -55,9 +59,11 @@ public class MusicAnalysis : MonoBehaviour
             level = 3;
             // Изменяем текущую интенсивность с использованием линейной интерполяции
             currentIntensity = Mathf.Lerp(minIntensity, maxIntensity, Mathf.PingPong(Time.time * pulseSpeed, 0.7f));
-
+        //    PulsationText.SetActive(true);
             // Устанавливаем новое значение интенсивности bloom
             bloomLayer.intensity.value = currentIntensity;
+
+
         }
         else if (averageLevel > 0.003)
         {
@@ -65,6 +71,7 @@ public class MusicAnalysis : MonoBehaviour
             level = 2;
             currentIntensity = 20f;
             bloomLayer.intensity.value = currentIntensity;
+        //    PulsationText.SetActive(false);
         }
         else
         {
@@ -72,13 +79,22 @@ public class MusicAnalysis : MonoBehaviour
             level = 1;
             currentIntensity = 20f;
             bloomLayer.intensity.value = currentIntensity;
+        //    PulsationText.SetActive(false);
         }
         //Вывод % 
         if (Missed != 0)
         {
             ScoreP = (int)(100 - (((float)Missed / (float)Score) * 100f));
             ScoreText.text = ScoreP.ToString() + "%";
-            Debug.Log(ScoreP + " " + Missed + " " + Score);
+            //Debug.Log(ScoreP + " " + Missed + " " + Score);
+            if (ScoreP >= 85)
+            {
+                PulsationText.SetActive(true);
+            }
+            else
+            {
+                PulsationText.SetActive(false);
+            }
         }
     }
 
@@ -88,9 +104,10 @@ public class MusicAnalysis : MonoBehaviour
         {
             Destroy(other.gameObject);
             Missed++;
+            comboSystem.Combo = 0;
+            comboSystem.checkMiss = true;
         }
     }
-
     IEnumerator GenerateCoroutine()
     {
         while (true)
