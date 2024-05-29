@@ -8,6 +8,8 @@ public class StartGame : MonoBehaviour
     public GameObject ScrollManager;
     public GameObject SelectMusic;
     public GameObject GameName;
+    public GameObject Settings;
+    public GameObject ImportButton;
 
     public void TimeToStartGame()
     {
@@ -15,5 +17,7 @@ public class StartGame : MonoBehaviour
         SelectMusic.SetActive(true);
         ScrollManager.SetActive(true);
         gameObject.SetActive(false);
+        Settings.SetActive(false);
+        ImportButton.SetActive(false);
     }
 }

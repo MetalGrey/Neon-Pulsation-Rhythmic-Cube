@@ -45,7 +45,7 @@ public class MusicSelect : MonoBehaviour
         }
     }
 
-    void ButtonClicked(int buttonIndex)
+    public void ButtonClicked(int buttonIndex)
     {
         Debug.Log(buttonIndex);
         StartCoroutine(PlayEmptyThenMusic(buttonIndex));
@@ -69,18 +69,12 @@ public class MusicSelect : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         StartCoroutine(FadeText());
-       
-
+        NeonDreams.SetActive(true);
+        MusicIsPlaying = true;
 
         MusicPlayer.clip = AllMusic[musicIndex];
         MusicPlayer.Play();
-
-        MusicIsPlaying = true;
-
-
         ScoreText.SetActive(!ScoreText.activeSelf);
-        NeonDreams.SetActive(true);
-
         currentMusicIndex = musicIndex;
     }
     IEnumerator FadeText()

@@ -12,8 +12,6 @@ public class ComboSystem : MonoBehaviour
 
     public float fadeDuration = 0.2f;
     private float timer = 0f;
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Collect")

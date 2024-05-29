@@ -33,6 +33,7 @@ public class MusicAnalysis : MonoBehaviour
     public GameObject PulsationText;
 
     public ComboSystem comboSystem;
+
     void Start()
     {
         spectrumData = new float[sampleSize];
