@@ -9,7 +9,6 @@ public class Move : MonoBehaviour
     public bool left = false;
     public bool right = false;
 
-
     public Material Ground1;
     public Material Ground2;
     public Material Ground3;
@@ -19,18 +18,10 @@ public class Move : MonoBehaviour
     public GameObject CubeParticle2;
     public GameObject CubeParticle3;
 
-//    public ParticleSystem JumpParticle1;
-//    public ParticleSystem JumpParticle2;0
-//    public ParticleSystem JumpParticle3;
     public float delay = 0.05f;
+
     public void Start()
     {
-    //    var main1 = JumpParticle1.main;
-    //    main1.startDelay = delay;
-    //    var main2 = JumpParticle2.main;
-   //     main2.startDelay = delay;
-   //     var main3 = JumpParticle3.main;
-   //     main3.startDelay = delay;
 
 
         anim = GetComponent<Animator>();
@@ -55,17 +46,21 @@ public class Move : MonoBehaviour
         {
             LeftSide();
         }
+
+        
     }
     public void RightSide()
     {
         if (anim.GetBool("right") == false)
         {
             anim.SetBool("left", true);
+
         //    JumpParticle1.Play();
             renderer.material = Ground1;
             CubeParticle1.SetActive(true);
             CubeParticle2.SetActive(false);
             CubeParticle3.SetActive(false);
+
         }
         else if (anim.GetBool("right") == true)
         {
@@ -100,37 +95,4 @@ public class Move : MonoBehaviour
         }
         
     }
-    /*void Update()
-    {
-        // Проверяем нажатие клавиш влево и вправо для перемещения объекта
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            if ((right == false) && (left == false))
-            {
-                anim.SetInteger("Position", 1);
-                center = false;
-                left = true;
-                right = false;
-            }
-       
-            
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            if ((right == false) && (left == false))
-            {
-                anim.SetInteger("Position", 3);
-                center = false;
-                left = false;
-                right = true;
-            }
-            else if (left == true)
-            {
-                anim.SetInteger("Position", 2);
-                
-            }
-
-        }
-    }*/
-
 }

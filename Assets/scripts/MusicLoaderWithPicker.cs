@@ -15,6 +15,11 @@ public class MusicLoaderWithPicker : MonoBehaviour
     public GameObject ImportButton;
     public GameObject Score;
     public GameObject Play;
+
+    public Button PlayB;
+    public Button SettingsB;
+    public Button ImportB;
+
     void Start()
     {
         musicSelect = scriptMusicSelectObject.GetComponent<MusicSelect>();
@@ -23,6 +28,9 @@ public class MusicLoaderWithPicker : MonoBehaviour
 
     void OpenFileBrowser()
     {
+        ImportB.interactable = false;
+        SettingsB.interactable = false;
+        PlayB.interactable = false;
         // Устанавливаем фильтр для показа только mp3 файлов
         FileBrowser.SetFilters(true, new FileBrowser.Filter("Audio Files", ".mp3"));
         // Открываем диалоговое окно выбора файла
@@ -39,6 +47,12 @@ public class MusicLoaderWithPicker : MonoBehaviour
             // Получаем путь к выбранному файлу
             string musicFilePath = FileBrowser.Result[0];
             StartCoroutine(LoadAudio(musicFilePath));
+        }
+        else
+        {
+            ImportB.interactable = true;
+            SettingsB.interactable = true;
+            PlayB.interactable = true;
         }
     }
 

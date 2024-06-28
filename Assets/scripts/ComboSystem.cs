@@ -5,30 +5,76 @@ using UnityEngine.UI;
 
 public class ComboSystem : MonoBehaviour
 {
+    public PulseAnimation PulseAnimation;
     public int Combo = 0;
     public Text ComboText;
     public GameObject ComboTextAsGameObject;
     public bool checkMiss = false;
-
     public float fadeDuration = 0.2f;
     private float timer = 0f;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Collect")
         {
-            if (Combo > 21)
-            {
-                ComboText.text = Combo.ToString() + "\nWOW!";
-            }
-            else if (Combo > 11)
-            {
-                ComboText.text = Combo.ToString() + "\nGJ!!!!!";
-            }
-            else
-            {
-                ComboText.text = Combo.ToString();
-            }
+            PulseAnimation.PulseAnim();
             Combo++;
+            UpdateComboText();
+            StartCoroutine(CheckVibration());
+        }
+    }
+    void UpdateComboText()
+    {
+        if (Combo >= 1000)
+        {
+            ComboText.text = Combo.ToString() + "\nHuman?!";
+        }
+        else if(Combo >= 300)
+        {
+            ComboText.text = Combo.ToString() + "\nGod like!";
+        }
+        else if(Combo >= 200)
+        {
+            ComboText.text = Combo.ToString() + "\nUnbelievable!";
+        }
+        else if(Combo >= 100)
+        {
+            ComboText.text = Combo.ToString() + "\nMagnificent!";
+        }
+        else if(Combo >= 60)
+        {
+            ComboText.text = Combo.ToString() + "\nBreathtaking!";
+        }
+        else if(Combo >= 40)
+        {
+            ComboText.text = Combo.ToString() + "\nMarvelous!";
+        }
+        else if (Combo >= 30)
+        {
+            ComboText.text = Combo.ToString() + "\nIncredible!";
+        }
+        else if (Combo >= 20)
+        {
+            ComboText.text = Combo.ToString() + "\nAmazing!";
+        }
+        else if (Combo >= 10)
+        {
+            ComboText.text = Combo.ToString() + "\nAwesome!";
+        }
+        else
+        {
+            ComboText.text = "";
+        }
+    }
+    IEnumerator CheckVibration()
+    {
+        yield return new WaitForEndOfFrame(); // Ждем конца текущего кадра
+        if (SettingsMenuManager.isVibrate)
+        {
+            if (Combo == 1000 || Combo == 300 || Combo == 200 || Combo == 100 || Combo == 60 || Combo == 40 || Combo == 30 || Combo == 20 || Combo == 11)
+            {
+                VibrationManager.Vibrate(50);
+            }
         }
     }
     private void Update()
@@ -38,7 +84,7 @@ public class ComboSystem : MonoBehaviour
             FadeText();
         }
 
-        if (Combo >= 11)
+        if (Combo >= 11) //11
         {
             ComboTextAsGameObject.SetActive(true);
             timer = 0f;

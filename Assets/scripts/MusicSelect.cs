@@ -26,6 +26,8 @@ public class MusicSelect : MonoBehaviour
     public GameObject RepeatButton;
 
     private int currentMusicIndex;
+
+    public GameObject CloseSelect;
     private void Start()
     {
         OriginalColor = dimeDelation.color;
@@ -55,6 +57,7 @@ public class MusicSelect : MonoBehaviour
         right.SetActive(!right.activeSelf);
         left.SetActive(!left.activeSelf);
         Scroll.SetActive(false);
+        CloseSelect.SetActive(false);
         // gameObject.SetActive(false);
 
         TimeCounter.SetActive(true);
