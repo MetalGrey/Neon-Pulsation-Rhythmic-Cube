@@ -7,6 +7,6 @@ public class ReloadScene : MonoBehaviour
 {
     public void PressToReloadScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("LoadingScene");
     }
 }
