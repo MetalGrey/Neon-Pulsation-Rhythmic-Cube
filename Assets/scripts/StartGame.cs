@@ -11,6 +11,7 @@ public class StartGame : MonoBehaviour
     public GameObject GameName;
     public GameObject Settings;
     public GameObject ImportButton;
+    public AudioSource SfxSource;
 
     private void Start() //Add Vibration to cash memory (Bag: if add this in settings script, it will not work before yiu open settings panel, so the best way to put it in the button you need yo push before game starts)
     {
@@ -30,6 +31,7 @@ public class StartGame : MonoBehaviour
         gameObject.SetActive(false);
         Settings.SetActive(false);
         ImportButton.SetActive(false);
+        SfxSource.Play();
     }
     public void BackToStart()
     {
@@ -40,5 +42,6 @@ public class StartGame : MonoBehaviour
         gameObject.SetActive(true);
         Settings.SetActive(true);
         ImportButton.SetActive(true);
+        SfxSource.Play();
     }
 }

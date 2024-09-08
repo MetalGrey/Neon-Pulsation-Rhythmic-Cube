@@ -11,9 +11,11 @@ public class SettingsMenuManager : MonoBehaviour
     public AudioMixer MainAudioMixer;
     public Toggle VibrateToggle;
     public static bool isVibrate;
+    public AudioSource SfxSource;
     public void OpenSettings()
     {
         Settings.SetActive(true);
+        SfxSource.Play();
     }
     public void ChangeMasterVolume()
     {
@@ -23,6 +25,7 @@ public class SettingsMenuManager : MonoBehaviour
     public void CloseSettigs()
     {
         Settings.SetActive(false);
+        SfxSource.Play();
     }
     public void ChangeMusicVolume()
     {
@@ -35,7 +38,12 @@ public class SettingsMenuManager : MonoBehaviour
     public void ChangeVibrate()
     {
         isVibrate = VibrateToggle.isOn;
+        SfxSource.Play();
         SaveVibration();
+    }
+    public void OpenPrivacyPolicy()
+    {
+        Application.OpenURL("https://metalgrey.github.io/Neon-Pulsation-Rhythmic-Cube-privacy-policy/index.html");
     }
     public void SaveVibration()
     {

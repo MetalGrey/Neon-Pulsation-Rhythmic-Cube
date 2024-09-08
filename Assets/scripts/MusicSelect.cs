@@ -24,10 +24,13 @@ public class MusicSelect : MonoBehaviour
 
     public bool MusicIsPlaying = false;
     public GameObject RepeatButton;
+    public GameObject GameOverText;
 
     private int currentMusicIndex;
 
     public GameObject CloseSelect;
+
+
     private void Start()
     {
         OriginalColor = dimeDelation.color;
@@ -61,6 +64,13 @@ public class MusicSelect : MonoBehaviour
         // gameObject.SetActive(false);
 
         TimeCounter.SetActive(true);
+
+        int gamePlayed = PlayerPrefs.GetInt("HowManyTimes");
+        gamePlayed += 1;
+        PlayerPrefs.SetInt("HowManyTimes", gamePlayed);
+        PlayerPrefs.Save();
+        Debug.LogWarning(gamePlayed);
+
 
         dimeDelation.text = "3";
         yield return new WaitForSeconds(0.5f);
@@ -112,10 +122,17 @@ public class MusicSelect : MonoBehaviour
                     PlayerPrefs.SetFloat(key, currentScore);
                     PlayerPrefs.Save();
                 }
-                
+
+                if (PlayerPrefs.GetInt("HowManyTimes") >= 2)
+                {
+                    AdsManager.Instance.interstitialAds.ShowInterstitialAd();
+                    PlayerPrefs.SetInt("HowManyTimes", 0);
+                    PlayerPrefs.Save();
+                }
 
                 NeonDreams.SetActive(false);
                 RepeatButton.SetActive(true);
+                GameOverText.SetActive(true);
                 right.SetActive(false);
                 left.SetActive(false);
             }

@@ -35,7 +35,7 @@ public class ComboSystem : MonoBehaviour
         }
         else if(Combo >= 200)
         {
-            ComboText.text = Combo.ToString() + "\nUnbelievable!";
+            ComboText.text = Combo.ToString() + "\nUnbelievable";
         }
         else if(Combo >= 100)
         {
@@ -43,7 +43,7 @@ public class ComboSystem : MonoBehaviour
         }
         else if(Combo >= 60)
         {
-            ComboText.text = Combo.ToString() + "\nBreathtaking!";
+            ComboText.text = Combo.ToString() + "\nBreathtaking";
         }
         else if(Combo >= 40)
         {

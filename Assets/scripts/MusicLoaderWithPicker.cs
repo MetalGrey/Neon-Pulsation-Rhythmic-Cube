@@ -20,6 +20,8 @@ public class MusicLoaderWithPicker : MonoBehaviour
     public Button SettingsB;
     public Button ImportB;
 
+    public AudioSource SfxSource;
+
     void Start()
     {
         musicSelect = scriptMusicSelectObject.GetComponent<MusicSelect>();
@@ -35,6 +37,7 @@ public class MusicLoaderWithPicker : MonoBehaviour
         FileBrowser.SetFilters(true, new FileBrowser.Filter("Audio Files", ".mp3"));
         // Открываем диалоговое окно выбора файла
         StartCoroutine(ShowLoadDialogCoroutine());
+        SfxSource.Play();
     }
 
     IEnumerator ShowLoadDialogCoroutine()
