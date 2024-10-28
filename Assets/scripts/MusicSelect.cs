@@ -30,6 +30,7 @@ public class MusicSelect : MonoBehaviour
 
     public GameObject CloseSelect;
 
+    public GameObject mainMenuMusic;
 
     private void Start()
     {
@@ -65,6 +66,7 @@ public class MusicSelect : MonoBehaviour
 
         TimeCounter.SetActive(true);
 
+        mainMenuMusic.SetActive(false);
         int gamePlayed = PlayerPrefs.GetInt("HowManyTimes");
         gamePlayed += 1;
         PlayerPrefs.SetInt("HowManyTimes", gamePlayed);
