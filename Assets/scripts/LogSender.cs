@@ -8,35 +8,30 @@ using System.Linq;
 
 public class LogSender : MonoBehaviour
 {
-    private string logServerUrl = ""; // URL сервера для отправки логов
+    private string logServerUrl = ""; //URL
     private Queue<string> logQueue = new Queue<string>();
     private bool isSending = false;
 
     void Start()
     {
-        // Подписываемся на обработчик логов Unity
         Application.logMessageReceived += HandleLog;
     }
 
     void HandleLog(string logString, string stackTrace, LogType type)
     {
-        // Отправляем только ошибки, исключения и assert'ы
         if (type == LogType.Error || type == LogType.Exception || type == LogType.Assert)
         {
             if (logString.Contains("Insecure connection not allowed")) 
             {
-                return; // Просто выходим из метода, не добавляя эту ошибку в лог
+                return; 
             }
-            // Получаем IP-адрес и MAC-адрес
             string ipAddress = GetLocalIPAddress();
             string DeviceName = GetDeviceName();
 
-            // Формируем лог-сообщение
             string logMessage = $"[Log] {System.DateTime.Now}: [{type}] {logString}\n{stackTrace}\nIP: {ipAddress}\nDevice name: {DeviceName}";
-            // Добавляем лог в очередь
+
             logQueue.Enqueue(logMessage);
 
-            // Если отправка логов не идет, запускаем процесс отправки
             if (!isSending)
             {
                 StartCoroutine(SendLogs());
@@ -52,7 +47,6 @@ public class LogSender : MonoBehaviour
         {
             string logMessage = logQueue.Dequeue();
 
-            // Создаем форму для отправки данных
             WWWForm form = new WWWForm();
             form.AddField("log", logMessage);
 
@@ -62,11 +56,11 @@ public class LogSender : MonoBehaviour
 
                 if (www.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError($"Ошибка отправки логов: {www.error}");
+                    Debug.LogError($"Error log send: {www.error}");
                 }
                 else
                 {
-                    Debug.Log("Лог успешно отправлен");
+                    Debug.Log("Log sended");
                 }
             }
         }
@@ -76,7 +70,6 @@ public class LogSender : MonoBehaviour
 
     void OnDestroy()
     {
-        // Отписываемся от обработчика логов Unity
         Application.logMessageReceived -= HandleLog;
     }
 
