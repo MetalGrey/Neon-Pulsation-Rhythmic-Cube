@@ -42,12 +42,12 @@ public class MusicLoaderWithPicker : MonoBehaviour
 
     IEnumerator ShowLoadDialogCoroutine()
     {
-        // Показываем диалоговое окно выбора файла и ждем пока пользователь не выберет файл
-        yield return FileBrowser.WaitForLoadDialog(FileBrowser.PickMode.Files, false, null, null, "Выберите музыкальный файл", "Выбрать");
+
+        yield return FileBrowser.WaitForLoadDialog(FileBrowser.PickMode.Files, false, null, null, "Select music", "Select");
 
         if (FileBrowser.Success)
         {
-            // Получаем путь к выбранному файлу
+
             string musicFilePath = FileBrowser.Result[0];
             StartCoroutine(LoadAudio(musicFilePath));
         }
