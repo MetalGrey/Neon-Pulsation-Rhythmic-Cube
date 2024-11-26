@@ -5,3 +5,11 @@ Androidリズムゲームで、プレイヤーは音楽のリズムとビート�
 技術スタックとサポート：
 ゲームはUnityプラットフォームで開発され、C#言語で記述されており、高いパフォーマンスとクロスプラットフォーム対応が実現されています。プレイヤーからのフィードバックを確実に収集するため、Ubuntu LinuxをベースにしたNode.jsとNginxを使用したWebサーバーが設置され、プレイヤーからのエラーログを受け取り、ゲームの改善に役立てています。
 データ保護要件への対応として、プレイヤーの個人データを取り扱うプライバシーポリシーも準備され、公開されています。また、ゲーム内で提供されるすべての音楽トラックは正規のライセンスに基づいて取得されており、著作権で保護されています。
+
+![GamePlay1](https://github.com/user-attachments/assets/4459a004-3f14-4df1-8a27-604556211654)
+
+![MainMenu1](https://github.com/user-attachments/assets/fbcdcc5f-d85b-4bbc-99fb-98ba181ac588)
+
+![Import](https://github.com/user-attachments/assets/966272b7-0133-4af2-aa4e-0f7063e73dff)
+
+![Settings](https://github.com/user-attachments/assets/e7614bf2-296c-4e8d-bc70-5e6dbc0386f0)
